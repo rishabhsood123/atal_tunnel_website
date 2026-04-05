@@ -1,0 +1,132 @@
+export const dashboardData = {
+  header: {
+    title: "Atal Sentinel",
+    links: ["Live Status", "Weather", "Advisory"],
+  },
+  hero: {
+    statusBadge: "Live Surveillance Active",
+    titlePrimary: "ATAL",
+    titleSecondary: "TUNNEL",
+    currentStatus: "OPEN",
+    traffic: "SMOOTH",
+    waitTime: "~5 MINS",
+    updated: "2 MIN AGO",
+    restrictionTitle: "Vehicle Restriction",
+    restrictionDesc: "No 4x2 light vehicles beyond North Portal due to icing.",
+    bgImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuD9S27k1k6VMgzqdg_7euzQodEMuJpJJCNBeceMVd6UVg2RqH3Kw1AmqZuh2B2axCPAtoqElwFIT_ih2zMgMr6-ezaBHRkJxyBpQEnX6mVrcl1Rwpa08nqWGSnaoUldKiE5WHyjCjxDrJ0k9MsbfsipQhGD396URzav_ekjcLL-bmnoshTT-l9m6PMpwdWeiOIITApZdOnIyJFkMjhK2e8DDmTRrMd1xKmiYFnvGxeyjKVvxz_vXmbfyDGb0KZzf3Ztq8lonwFwKW4",
+  },
+  weather: {
+    sectionTitle: "Atmospheric Data",
+    sectionHeading: "Portal Environments",
+    alertText: "Light Snowfall Active at North Portal",
+    southPortal: {
+      name: "South Portal (Manali)",
+      temp: "-2°C",
+      visibility: "800M",
+      windSpeed: "12 Kmph",
+      icon: "cloudy_snowing",
+    },
+    northPortal: {
+      name: "North Portal (Sissu)",
+      temp: "-8°C",
+      snow: "12 CM",
+      visibility: "200M",
+      icon: "ac_unit",
+    },
+  },
+  advisory: {
+    strategicTitle: "Strategic Timing",
+    strategicHeading: "Transit Forecast",
+    bestTime: {
+      title: "Best Time Today",
+      time: "07:00 AM – 10:30 AM",
+    },
+    avoidTime: {
+      title: "Avoid Transit",
+      time: "12:00 PM – 04:00 PM (Heavy Traffic)",
+    },
+    schedule: [
+      { label: "Morning Rush", time: "10 AM - 12 PM" },
+      { label: "Tunnel Maintenance", time: "Weekly Mon (9-11 AM)" },
+    ],
+    noticeTitle: "Official Orders",
+    noticeHeading: "Notice Board",
+    notices: [
+      {
+        icon: "minor_crash",
+        title: "Anti-Skid Chains Mandatory",
+        desc: "Due to heavy icing on the Lahaul side, all non-4x4 vehicles must use snow chains for the next 14km.",
+        colorClass: "bg-primary-container",
+      },
+      {
+        icon: "camera_video",
+        title: "Speed Limit Enforcement",
+        desc: "Strict speed limit of 40km/h inside the tunnel. Zero tolerance for photography/stopping inside the tube.",
+        colorClass: "bg-secondary",
+      },
+      {
+        icon: "local_gas_station",
+        title: "Fuel Advisory",
+        desc: "Last fuel station before North Portal is at Tandi (32km from Sissu). Ensure full tank before entry.",
+        colorClass: "bg-outline",
+      },
+    ],
+  },
+  guide: {
+    title: "Traveler's Handbook",
+    items: [
+      {
+        icon: "straighten",
+        value: "9.02 KM",
+        desc: "Total tunnel length. The world's longest highway tunnel above 10,000 feet.",
+        bgClass: "bg-surface-container",
+        iconColorClass: "text-primary",
+        textColorClass: "text-on-surface-variant",
+      },
+      {
+        icon: "local_parking",
+        value: "Parking Areas",
+        desc: "Designated scenic spots available 2km before South Portal and at North Portal exit.",
+        bgClass: "bg-surface-container-high",
+        iconColorClass: "text-secondary",
+        textColorClass: "text-on-surface-variant",
+      },
+      {
+        icon: "dangerous",
+        value: "Absolute No's",
+        desc: "No overtaking inside tunnel. No photography. No stopping. Hazard lights only for emergencies.",
+        bgClass: "bg-surface-container-highest",
+        iconColorClass: "text-tertiary",
+        textColorClass: "text-on-surface-variant",
+      },
+      {
+        icon: "emergency",
+        value: "Emergency",
+        desc: "Every 500m there are emergency exit tunnels and SOS phone booths connected directly to the control room.",
+        bgClass: "bg-primary-container text-white",
+        iconColorClass: "text-primary-fixed",
+        textColorClass: "opacity-80 text-sm",
+      },
+    ],
+  },
+  footer: {
+    title: "Atal Sentinel",
+    desc: "Official transit portal for the Atal Tunnel, Rohtang Pass. Managed by Himachal Pradesh Police and BRO.",
+    helplines: [
+      { icon: "call", title: "Medical Emergency", number: "108", colorClass: "bg-tertiary" },
+      { icon: "call", title: "Police Response", number: "112", colorClass: "bg-secondary" },
+    ],
+    controlRooms: [
+      { label: "Manali PCR:", number: "+91 1902 252326" },
+      { label: "Keylong PCR:", number: "+91 1900 222210" },
+    ],
+    copyright: "© 2024 Atal Tunnel Management Authority. All rights reserved.",
+    links: ["Privacy Policy", "Road Safety Act", "HP Government"],
+  },
+  bottomNav: [
+    { icon: "radar", label: "Status", active: true },
+    { icon: "ac_unit", label: "Weather", active: false },
+    { icon: "warning", label: "Advisory", active: false },
+    { icon: "explore", label: "Guide", active: false },
+  ],
+};

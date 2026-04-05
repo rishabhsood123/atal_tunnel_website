@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#cbe7f5",
+              "on-primary-container": "#8abda9",
+              "surface-tint": "#376757",
+              "surface-container-high": "#d1ecfa",
+              "surface": "#f3faff",
+              "primary-fixed": "#baeed9",
+              "surface-dim": "#c3deec",
+              "secondary-container": "#67bafd",
+              "on-secondary-container": "#004972",
+              "surface-bright": "#f3faff",
+              "tertiary": "#650007",
+              "on-error-container": "#93000a",
+              "on-tertiary": "#ffffff",
+              "surface-container-low": "#e6f6ff",
+              "secondary-fixed": "#cde5ff",
+              "on-secondary-fixed-variant": "#004b74",
+              "outline": "#707974",
+              "primary-fixed-dim": "#9ed1bd",
+              "inverse-surface": "#19343e",
+              "on-secondary-fixed": "#001d32",
+              "on-tertiary-container": "#ff958c",
+              "background": "#f3faff",
+              "surface-container": "#d8f2ff",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb3ac",
+              "tertiary-fixed": "#ffdad6",
+              "on-background": "#021f29",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#1d4f40",
+              "primary": "#003629",
+              "on-surface": "#021f29",
+              "on-primary": "#ffffff",
+              "outline-variant": "#c0c9c3",
+              "surface-variant": "#cbe7f5",
+              "inverse-on-surface": "#dff4ff",
+              "secondary-fixed-dim": "#94ccff",
+              "secondary": "#006399",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-container": "#8f000f",
+              "inverse-primary": "#9ed1bd",
+              "on-tertiary-fixed": "#410003",
+              "primary-container": "#1b4d3e",
+              "on-surface-variant": "#404945",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed": "#002117",
+              "on-tertiary-fixed-variant": "#930010"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Public Sans"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.bg-alpine-hero {
+    background-image: linear-gradient(rgba(2, 31, 41, 0.4), rgba(2, 31, 41, 0.7)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuD9S27k1k6VMgzqdg_7euzQodEMuJpJJCNBeceMVd6UVg2RqH3Kw1AmqZuh2B2axCPAtoqElwFIT_ih2zMgMr6-ezaBHRkJxyBpQEnX6mVrcl1Rwpa08nqWGSnaoUldKiE5WHyjCjxDrJ0k9MsbfsipQhGD396URzav_ekjcLL-bmnoshTT-l9m6PMpwdWeiOIITApZdOnIyJFkMjhK2e8DDmTRrMd1xKmiYFnvGxeyjKVvxz_vXmbfyDGb0KZzf3Ztq8lonwFwKW4);
+    background-size: cover;
+    background-position: center
+    }
+.glass-card {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.1)
+    }
+.no-scrollbar::-webkit-scrollbar {
+    display: none
+    }</style>
+</head>
+<body class="bg-background font-body text-on-background selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f3faff]/80 dark:bg-[#021f29]/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(2,31,41,0.04)] no-border">
+<div class="flex justify-between items-center px-6 h-16 max-w-screen-xl mx-auto">
+<div class="font-['Space_Grotesk'] font-black text-xl tracking-tighter text-[#003629] dark:text-[#baeed9] uppercase">
+                Atal Sentinel
+            </div>
+<div class="hidden md:flex gap-8">
+<a class="font-['Space_Grotesk'] font-bold text-lg tracking-tight text-[#003629] dark:text-[#baeed9] border-b-2 border-[#003629]" href="#">Live Status</a>
+<a class="font-['Space_Grotesk'] font-bold text-lg tracking-tight text-[#021f29]/60 dark:text-[#f3faff]/60 hover:bg-[#e6f6ff]/50 transition-colors" href="#">Weather</a>
+<a class="font-['Space_Grotesk'] font-bold text-lg tracking-tight text-[#021f29]/60 dark:text-[#f3faff]/60 hover:bg-[#e6f6ff]/50 transition-colors" href="#">Advisory</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-[#e6f6ff]/50 transition-colors text-[#003629]">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#e6f6ff]/50 transition-colors text-[#003629]">
+<span class="material-symbols-outlined">emergency_share</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-16 pb-24 md:pb-0">
+<!-- Hero Section -->
+<section class="relative min-h-[870px] flex items-center px-6 md:px-12 py-12 bg-alpine-hero overflow-hidden" data-alt="majestic high-altitude mountain pass with a modern tunnel entrance at dusk with cold blue tones and cinematic lighting">
+<div class="max-w-screen-xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 space-y-8">
+<div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-white border border-white/20">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-fixed opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary-fixed"></span>
+</span>
+<span class="text-xs font-bold tracking-widest uppercase">Live Surveillance Active</span>
+</div>
+<h1 class="font-headline text-5xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter">
+                        ATAL <br/> <span class="text-primary-fixed">TUNNEL</span>
+</h1>
+<div class="flex flex-wrap gap-4 pt-4">
+<!-- STATUS BADGE -->
+<div class="bg-primary-fixed text-on-primary-fixed px-10 py-6 rounded-xl flex flex-col justify-center items-start shadow-2xl">
+<span class="text-sm font-bold uppercase tracking-widest opacity-70">Current Status</span>
+<span class="font-headline text-5xl font-black">OPEN</span>
+</div>
+<div class="glass-card text-white px-8 py-6 rounded-xl border border-white/10 flex flex-col justify-center min-w-[180px]">
+<span class="text-sm font-bold uppercase tracking-widest opacity-70">Traffic</span>
+<span class="font-headline text-3xl font-bold">SMOOTH</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest/10 backdrop-blur-xl p-6 rounded-xl border border-white/10 text-white">
+<span class="material-symbols-outlined text-secondary-fixed mb-2" style="font-variation-settings: 'FILL' 1;">timer</span>
+<p class="text-xs font-bold uppercase tracking-widest opacity-60">Wait Time</p>
+<p class="font-headline text-2xl font-bold">~5 MINS</p>
+</div>
+<div class="bg-surface-container-lowest/10 backdrop-blur-xl p-6 rounded-xl border border-white/10 text-white">
+<span class="material-symbols-outlined text-secondary-fixed mb-2">history</span>
+<p class="text-xs font-bold uppercase tracking-widest opacity-60">Updated</p>
+<p class="font-headline text-2xl font-bold">2 MIN AGO</p>
+</div>
+<div class="col-span-2 bg-gradient-to-br from-primary to-primary-container p-6 rounded-xl text-white shadow-xl">
+<div class="flex justify-between items-center">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest opacity-70 mb-1">Vehicle Restriction</p>
+<p class="font-headline text-xl font-medium leading-tight">No 4x2 light vehicles beyond North Portal due to icing.</p>
+</div>
+<span class="material-symbols-outlined text-4xl opacity-50">minor_crash</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Weather & Snow Conditions -->
+<section class="max-w-screen-xl mx-auto px-6 py-20">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+<div class="space-y-2">
+<span class="text-secondary font-black uppercase tracking-widest text-sm">Atmospheric Data</span>
+<h2 class="font-headline text-4xl font-bold text-on-background">Portal Environments</h2>
+</div>
+<!-- Snowfall Alert Banner -->
+<div class="bg-error-container text-on-error-container px-6 py-3 rounded-full flex items-center gap-3">
+<span class="material-symbols-outlined animate-pulse" style="font-variation-settings: 'FILL' 1;">ac_unit</span>
+<span class="font-bold text-sm uppercase tracking-wide">Light Snowfall Active at North Portal</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- South Portal -->
+<div class="bg-surface-container-low p-8 rounded-full shadow-sm flex flex-col md:flex-row gap-8 items-center border border-outline-variant/10">
+<div class="flex-1 space-y-4">
+<div class="flex items-center gap-2">
+<span class="w-8 h-[2px] bg-secondary"></span>
+<span class="font-bold tracking-widest uppercase text-xs">South Portal (Manali)</span>
+</div>
+<h3 class="font-headline text-6xl font-black text-on-background">-2°C</h3>
+<div class="grid grid-cols-2 gap-4 pt-4">
+<div>
+<p class="text-[10px] font-bold uppercase opacity-50">Visibility</p>
+<p class="font-bold">800M</p>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase opacity-50">Wind Speed</p>
+<p class="font-bold">12 Kmph</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-6xl text-secondary" style="font-variation-settings: 'FILL' 1;">cloudy_snowing</span>
+</div>
+</div>
+<!-- North Portal -->
+<div class="bg-surface-container-highest p-8 rounded-full shadow-sm flex flex-col md:flex-row gap-8 items-center border border-outline-variant/10">
+<div class="flex-1 space-y-4">
+<div class="flex items-center gap-2">
+<span class="w-8 h-[2px] bg-primary"></span>
+<span class="font-bold tracking-widest uppercase text-xs">North Portal (Sissu)</span>
+</div>
+<h3 class="font-headline text-6xl font-black text-on-background">-8°C</h3>
+<div class="grid grid-cols-2 gap-4 pt-4">
+<div>
+<p class="text-[10px] font-bold uppercase opacity-50">Snow Accumulation</p>
+<p class="font-bold">12 CM</p>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase opacity-50">Visibility</p>
+<p class="font-bold text-error">200M</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-6xl text-tertiary-container">ac_unit</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Travel Advisory & Best Time -->
+<section class="bg-surface-container-low/50 py-20 px-6">
+<div class="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Best Time To Cross -->
+<div class="lg:col-span-5 space-y-8">
+<div class="space-y-2">
+<span class="text-primary font-black uppercase tracking-widest text-sm">Strategic Timing</span>
+<h2 class="font-headline text-4xl font-bold text-on-background">Transit Forecast</h2>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-xl space-y-6">
+<div class="flex items-center gap-4 p-4 bg-primary-fixed/30 rounded-lg border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-bold text-on-primary-fixed">Best Time Today</p>
+<p class="text-sm opacity-80">07:00 AM – 10:30 AM</p>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-tertiary-fixed/30 rounded-lg border-l-4 border-tertiary">
+<span class="material-symbols-outlined text-tertiary">warning</span>
+<div>
+<p class="font-bold text-tertiary">Avoid Transit</p>
+<p class="text-sm opacity-80">12:00 PM – 04:00 PM (Heavy Traffic)</p>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/10">
+<p class="text-xs font-bold uppercase tracking-widest opacity-50 mb-4">Daily Schedule</p>
+<div class="space-y-2">
+<div class="flex justify-between text-sm">
+<span>Morning Rush</span>
+<span class="font-bold">10 AM - 12 PM</span>
+</div>
+<div class="flex justify-between text-sm">
+<span>Tunnel Maintenance</span>
+<span class="font-bold">Weekly Mon (9-11 AM)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Travel Advisory Board -->
+<div class="lg:col-span-7 space-y-8">
+<div class="space-y-2">
+<span class="text-tertiary font-black uppercase tracking-widest text-sm">Official Orders</span>
+<h2 class="font-headline text-4xl font-bold text-on-background">Notice Board</h2>
+</div>
+<div class="grid gap-4">
+<div class="bg-white p-6 rounded-xl flex gap-6 items-start hover:shadow-lg transition-shadow">
+<div class="bg-primary-container p-3 rounded-lg text-white">
+<span class="material-symbols-outlined">minor_crash</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Anti-Skid Chains Mandatory</h4>
+<p class="text-on-surface-variant text-sm mt-1">Due to heavy icing on the Lahaul side, all non-4x4 vehicles must use snow chains for the next 14km.</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl flex gap-6 items-start hover:shadow-lg transition-shadow">
+<div class="bg-secondary p-3 rounded-lg text-white">
+<span class="material-symbols-outlined">camera_video</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Speed Limit Enforcement</h4>
+<p class="text-on-surface-variant text-sm mt-1">Strict speed limit of 40km/h inside the tunnel. Zero tolerance for photography/stopping inside the tube.</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl flex gap-6 items-start hover:shadow-lg transition-shadow">
+<div class="bg-outline p-3 rounded-lg text-white">
+<span class="material-symbols-outlined">local_gas_station</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Fuel Advisory</h4>
+<p class="text-on-surface-variant text-sm mt-1">Last fuel station before North Portal is at Tandi (32km from Sissu). Ensure full tank before entry.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Travel Guide -->
+<section class="py-24 overflow-hidden">
+<div class="max-w-screen-xl mx-auto px-6 mb-12">
+<h2 class="font-headline text-4xl font-bold">Traveler's Handbook</h2>
+</div>
+<div class="flex gap-6 px-6 overflow-x-auto no-scrollbar snap-x snap-mandatory max-w-screen-xl mx-auto">
+<div class="snap-start shrink-0 w-80 bg-surface-container p-8 rounded-3xl space-y-6">
+<span class="material-symbols-outlined text-5xl text-primary" style="font-variation-settings: 'FILL' 1;">straighten</span>
+<h3 class="font-headline text-2xl font-bold">9.02 KM</h3>
+<p class="text-on-surface-variant text-sm">Total tunnel length. The world's longest highway tunnel above 10,000 feet.</p>
+</div>
+<div class="snap-start shrink-0 w-80 bg-surface-container-high p-8 rounded-3xl space-y-6">
+<span class="material-symbols-outlined text-5xl text-secondary" style="font-variation-settings: 'FILL' 1;">local_parking</span>
+<h3 class="font-headline text-2xl font-bold">Parking Areas</h3>
+<p class="text-on-surface-variant text-sm">Designated scenic spots available 2km before South Portal and at North Portal exit.</p>
+</div>
+<div class="snap-start shrink-0 w-80 bg-surface-container-highest p-8 rounded-3xl space-y-6">
+<span class="material-symbols-outlined text-5xl text-tertiary" style="font-variation-settings: 'FILL' 1;">dangerous</span>
+<h3 class="font-headline text-2xl font-bold">Absolute No's</h3>
+<p class="text-on-surface-variant text-sm">No overtaking inside tunnel. No photography. No stopping. Hazard lights only for emergencies.</p>
+</div>
+<div class="snap-start shrink-0 w-80 bg-primary-container p-8 rounded-3xl space-y-6 text-white">
+<span class="material-symbols-outlined text-5xl text-primary-fixed" style="font-variation-settings: 'FILL' 1;">emergency</span>
+<h3 class="font-headline text-2xl font-bold">Emergency</h3>
+<p class="opacity-80 text-sm">Every 500m there are emergency exit tunnels and SOS phone booths connected directly to the control room.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Emergency Footer -->
+<footer class="bg-inverse-surface text-white py-12 px-6">
+<div class="max-w-screen-xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-white/10 pb-12 mb-12">
+<div class="space-y-4">
+<div class="font-headline font-black text-2xl tracking-tighter uppercase">Atal Sentinel</div>
+<p class="opacity-60 text-sm max-w-xs">Official transit portal for the Atal Tunnel, Rohtang Pass. Managed by Himachal Pradesh Police and BRO.</p>
+</div>
+<div class="space-y-6">
+<p class="text-xs font-bold uppercase tracking-widest opacity-50">Critical Helplines</p>
+<div class="space-y-4">
+<a class="flex items-center gap-3 group" href="tel:108">
+<span class="bg-tertiary w-10 h-10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">call</span>
+</span>
+<div>
+<p class="text-sm opacity-60">Medical Emergency</p>
+<p class="font-bold text-xl">108</p>
+</div>
+</a>
+<a class="flex items-center gap-3 group" href="tel:112">
+<span class="bg-secondary w-10 h-10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">call</span>
+</span>
+<div>
+<p class="text-sm opacity-60">Police Response</p>
+<p class="font-bold text-xl">112</p>
+</div>
+</a>
+</div>
+</div>
+<div class="space-y-6">
+<p class="text-xs font-bold uppercase tracking-widest opacity-50">Control Rooms</p>
+<div class="space-y-2 text-sm">
+<p class="flex justify-between"><span>Manali PCR:</span> <span class="font-bold">+91 1902 252326</span></p>
+<p class="flex justify-between"><span>Keylong PCR:</span> <span class="font-bold">+91 1900 222210</span></p>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 text-xs opacity-40">
+<p>© 2024 Atal Tunnel Management Authority. All rights reserved.</p>
+<div class="flex gap-8">
+<a href="#">Privacy Policy</a>
+<a href="#">Road Safety Act</a>
+<a href="#">HP Government</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 pb-safe bg-[#f3faff]/90 dark:bg-[#021f29]/90 backdrop-blur-2xl no-border bg-gradient-to-t from-[#f3faff] to-transparent shadow-[0_-8px_40px_rgba(2,31,41,0.06)]">
+<div class="flex justify-around items-center h-20 px-4 w-full">
+<a class="flex flex-col items-center justify-center bg-[#baeed9] dark:bg-[#1b4d3e] text-[#002117] dark:text-[#baeed9] rounded-2xl px-5 py-2 scale-105 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">radar</span>
+<span class="font-['Public_Sans'] text-[11px] font-bold uppercase tracking-widest mt-1">Status</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#021f29]/50 dark:text-[#f3faff]/50 px-5 py-2 hover:text-[#003629] transition-all" href="#">
+<span class="material-symbols-outlined">ac_unit</span>
+<span class="font-['Public_Sans'] text-[11px] font-bold uppercase tracking-widest mt-1">Weather</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#021f29]/50 dark:text-[#f3faff]/50 px-5 py-2 hover:text-[#003629] transition-all" href="#">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-['Public_Sans'] text-[11px] font-bold uppercase tracking-widest mt-1">Advisory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#021f29]/50 dark:text-[#f3faff]/50 px-5 py-2 hover:text-[#003629] transition-all" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-['Public_Sans'] text-[11px] font-bold uppercase tracking-widest mt-1">Guide</span>
+</a>
+</div>
+</nav>
+</body></html>

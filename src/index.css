@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.bg-alpine-hero {
+    background-image: linear-gradient(rgba(2, 31, 41, 0.4), rgba(2, 31, 41, 0.7)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuD9S27k1k6VMgzqdg_7euzQodEMuJpJJCNBeceMVd6UVg2RqH3Kw1AmqZuh2B2axCPAtoqElwFIT_ih2zMgMr6-ezaBHRkJxyBpQEnX6mVrcl1Rwpa08nqWGSnaoUldKiE5WHyjCjxDrJ0k9MsbfsipQhGD396URzav_ekjcLL-bmnoshTT-l9m6PMpwdWeiOIITApZdOnIyJFkMjhK2e8DDmTRrMd1xKmiYFnvGxeyjKVvxz_vXmbfyDGb0KZzf3Ztq8lonwFwKW4);
+    background-size: cover;
+    background-position: center;
+}
+
+.glass-card {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
