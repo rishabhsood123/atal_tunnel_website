@@ -5,26 +5,26 @@ export const Header = () => {
     const [activeTab, setActiveTab] = useState('Live Status');
 
     useEffect(() => {
-        const handleScroll = () => {
-            const sections = dashboardData.header.links;
-            let current = 'Live Status'; // Default
-            for (const link of sections) {
-                const targetId = link === 'Live Status' ? 'status' : link.toLowerCase();
-                const element = document.getElementById(targetId);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    // If the section's top is mostly within the viewport 
-                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 3) {
-                        current = link;
-                    }
+        const sections = dashboardData.header.links;
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeLabel = sections.find(s => (s === 'Live Status' ? 'status' : s.toLowerCase()) === entry.target.id);
+                    if (activeLabel) setActiveTab(activeLabel);
                 }
-            }
-            setActiveTab(current);
-        };
+            });
+        }, {
+            rootMargin: '-40% 0px -50% 0px'
+        });
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // Initial active state
-        return () => window.removeEventListener('scroll', handleScroll);
+        sections.forEach(link => {
+            const id = link === 'Live Status' ? 'status' : link.toLowerCase();
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
     }, []);
 
     return (

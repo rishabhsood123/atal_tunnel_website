@@ -5,25 +5,25 @@ export const BottomNav = () => {
     const [activeTab, setActiveTab] = useState('Status');
 
     useEffect(() => {
-        const handleScroll = () => {
-            const sections = dashboardData.bottomNav.map(item => item.label);
-            let current = 'Status'; // Default
-            for (const label of sections) {
-                const element = document.getElementById(label.toLowerCase());
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    // If the section's top is mostly within the viewport 
-                    if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 3) {
-                        current = label;
-                    }
+        const sections = dashboardData.bottomNav.map(item => item.label);
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const activeLabel = sections.find(s => s.toLowerCase() === entry.target.id);
+                    if (activeLabel) setActiveTab(activeLabel);
                 }
-            }
-            setActiveTab(current);
-        };
+            });
+        }, {
+            rootMargin: '-40% 0px -50% 0px'
+        });
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // Initial active state
-        return () => window.removeEventListener('scroll', handleScroll);
+        sections.forEach(label => {
+            const el = document.getElementById(label.toLowerCase());
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
     }, []);
 
     return (
