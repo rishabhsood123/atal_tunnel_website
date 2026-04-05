@@ -153,6 +153,106 @@ app.get('/api/tunnel-status', async (req, res) => {
     }
 });
 
+// ==========================================
+// 5. TRANSIT FORECAST ENGINE
+// ==========================================
+const fetchHourlyWeather = async (lat, lon) => {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code,snowfall,visibility,wind_speed_10m&forecast_hours=12&timezone=auto`;
+    const response = await axios.get(url, { timeout: 5000 });
+    return response.data;
+};
+
+const calculateTrafficDelayMock = (hour) => {
+    if (hour >= 12 && hour <= 16) return 40; 
+    if (hour >= 10 && hour <= 12) return 20; 
+    if (hour >= 17 && hour <= 20) return 65; 
+    return 5; 
+};
+
+app.get('/api/transit-forecast', async (req, res) => {
+    try {
+        const cacheKey = 'transit_forecast';
+        if (cache.has(cacheKey)) return res.json(cache.get(cacheKey));
+
+        const weatherData = await fetchHourlyWeather(TUNNEL_COORDS.south.lat, TUNNEL_COORDS.south.lon);
+        const hourly = weatherData.hourly;
+
+        const bestTimes = [];
+        const avoidTimes = [];
+        const currentDay = new Date().getDay();
+        const isWeekend = (currentDay === 0 || currentDay === 6);
+        const dayModifier = isWeekend ? 10 : 0; 
+
+        for (let i = 0; i < 12; i++) {
+            const timeString = hourly.time[i];
+            const dateObj = new Date(timeString);
+            const hour = dateObj.getHours();
+
+            const delayPercent = calculateTrafficDelayMock(hour);
+            let traffic_score = 5;
+            if (delayPercent >= 10 && delayPercent < 30) traffic_score = 15;
+            else if (delayPercent >= 30 && delayPercent <= 60) traffic_score = 30;
+            else if (delayPercent > 60) traffic_score = 45;
+
+            let weather_score = 0;
+            const snowfall = hourly.snowfall[i];
+            const visibility = hourly.visibility[i];
+
+            if (snowfall > 0 && snowfall < 5) weather_score += 10;
+            else if (snowfall >= 5 && snowfall <= 10) weather_score += 25;
+            else if (snowfall > 10) weather_score += 40;
+
+            if (visibility < 1000) weather_score += 10;
+
+            let time_pattern_score = 5;
+            if (hour >= 6 && hour < 9) time_pattern_score = 5;
+            else if (hour >= 9 && hour < 11) time_pattern_score = 10;
+            else if (hour >= 11 && hour < 15) time_pattern_score = 30;
+            else if (hour >= 15 && hour < 17) time_pattern_score = 20;
+
+            let risk_score = traffic_score + weather_score + time_pattern_score + dayModifier;
+            risk_score = Math.max(0, Math.min(100, risk_score));
+
+            if (risk_score <= 25) bestTimes.push(hour);
+            else if (risk_score > 75) avoidTimes.push(hour);
+        }
+
+        const formatWindow = (hours) => {
+            if (hours.length === 0) return "No clear window";
+            const start = hours[0];
+            const end = hours[hours.length - 1] + 1;
+            const formatTime = (h) => {
+                const ampm = h >= 12 ? 'PM' : 'AM';
+                const hr = h % 12 || 12;
+                return `${hr < 10 ? '0'+hr : hr}:00 ${ampm}`;
+            };
+            return `${formatTime(start)} - ${formatTime(end)}`;
+        };
+
+        const result = {
+            bestTime: {
+                title: "Best Time Today",
+                time: formatWindow(bestTimes)
+            },
+            avoidTime: {
+                title: "Avoid Transit",
+                time: formatWindow(avoidTimes) + (avoidTimes.length > 0 ? " (Heavy Traffic)" : "")
+            },
+            schedule: [
+                { label: "Morning Rush", time: "10 AM - 12 PM" },
+                { label: "Tunnel Maintenance", time: "Weekly Mon (9-11 AM)" }
+            ],
+            updated_at: new Date().toISOString()
+        };
+
+        cache.set(cacheKey, result);
+        res.json(result);
+    } catch (error) {
+        console.error("Forecast Error:", error.message);
+        res.status(502).json({ error: "Failed to fetch forecast" });
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Atal Tunnel Live API running on http://localhost:${PORT}`);

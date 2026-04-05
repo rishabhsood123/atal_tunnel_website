@@ -7,21 +7,24 @@ export const useDashboardData = () => {
     const [traffic, setTraffic] = useState<any>(null);
     const [advisories, setAdvisories] = useState<any>(null);
     const [tunnelStatus, setTunnelStatus] = useState<any>(null);
+    const [transitForecast, setTransitForecast] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     const fetchData = async () => {
         try {
-            const [wReq, tReq, aReq, stReq] = await Promise.all([
+            const [wReq, tReq, aReq, stReq, tfReq] = await Promise.all([
                 fetch(`${API_BASE}/weather`).then(res => res.json()),
                 fetch(`${API_BASE}/traffic`).then(res => res.json()),
                 fetch(`${API_BASE}/advisories`).then(res => res.json()),
-                fetch(`${API_BASE}/tunnel-status`).then(res => res.json())
+                fetch(`${API_BASE}/tunnel-status`).then(res => res.json()),
+                fetch(`${API_BASE}/transit-forecast`).then(res => res.json())
             ]);
             setWeather(wReq);
             setTraffic(tReq);
             setAdvisories(aReq);
             setTunnelStatus(stReq);
+            setTransitForecast(tfReq);
             setLoading(false);
             setError(null);
         } catch (err) {
@@ -38,5 +41,5 @@ export const useDashboardData = () => {
         return () => clearInterval(interval);
     }, []);
 
-    return { weather, traffic, advisories, tunnelStatus, loading, error };
+    return { weather, traffic, advisories, tunnelStatus, transitForecast, loading, error };
 };

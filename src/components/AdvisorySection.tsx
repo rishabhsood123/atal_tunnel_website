@@ -3,7 +3,7 @@ import { useDashboardData } from '../hooks/useDashboardData';
 
 export const AdvisorySection = () => {
     const { advisory } = dashboardData;
-    const { advisories, loading } = useDashboardData();
+    const { advisories, transitForecast, loading } = useDashboardData();
 
     return (
         <section id="advisory" className="bg-surface-container-low/50 py-20 px-6 scroll-mt-24">
@@ -19,22 +19,22 @@ export const AdvisorySection = () => {
                         <div className="flex items-center gap-4 p-4 bg-primary-fixed/30 rounded-lg border-l-4 border-primary">
                             <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
                             <div>
-                                <p className="font-bold text-on-primary-fixed">{advisory.bestTime.title}</p>
-                                <p className="text-sm opacity-80">{advisory.bestTime.time}</p>
+                                <p className="font-bold text-on-primary-fixed">{transitForecast?.bestTime?.title || advisory.bestTime.title}</p>
+                                <p className="text-sm opacity-80">{transitForecast?.bestTime?.time || (!transitForecast && loading ? "Loading..." : advisory.bestTime.time)}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4 p-4 bg-tertiary-fixed/30 rounded-lg border-l-4 border-tertiary">
                             <span className="material-symbols-outlined text-tertiary">warning</span>
                             <div>
-                                <p className="font-bold text-tertiary">{advisory.avoidTime.title}</p>
-                                <p className="text-sm opacity-80">{advisory.avoidTime.time}</p>
+                                <p className="font-bold text-tertiary">{transitForecast?.avoidTime?.title || advisory.avoidTime.title}</p>
+                                <p className="text-sm opacity-80">{transitForecast?.avoidTime?.time || (!transitForecast && loading ? "Loading..." : advisory.avoidTime.time)}</p>
                             </div>
                         </div>
 
                         <div className="pt-4 border-t border-outline-variant/10">
                             <p className="text-xs font-bold uppercase tracking-widest opacity-50 mb-4">Daily Schedule</p>
                             <div className="space-y-2">
-                                {advisory.schedule.map((item, idx) => (
+                                {(transitForecast?.schedule || advisory.schedule).map((item: any, idx: number) => (
                                     <div key={idx} className="flex justify-between text-sm">
                                         <span>{item.label}</span>
                                         <span className="font-bold">{item.time}</span>
